@@ -1,7 +1,8 @@
 
 import React from 'react';
-import { ExternalLink } from 'lucide-react';
+import { Eye } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import { useNavigate } from 'react-router-dom';
 
 export interface WebsiteCardProps {
   title: string;
@@ -18,6 +19,18 @@ const WebsiteCard: React.FC<WebsiteCardProps> = ({
   websiteUrl,
   category
 }) => {
+  const navigate = useNavigate();
+  
+  const handlePreview = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Instead of navigating to external URL, we'll navigate to an internal preview page
+    navigate(`/preview?url=${encodeURIComponent(websiteUrl)}`);
+  };
+  
+  const handleDetails = () => {
+    navigate(`/website-details?title=${encodeURIComponent(title)}`);
+  };
+  
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-200 flex flex-col h-full">
       <div className="relative">
@@ -42,18 +55,19 @@ const WebsiteCard: React.FC<WebsiteCardProps> = ({
             variant="ghost"
             size="sm"
             className="text-blue-600 hover:text-blue-800 p-0"
+            onClick={handleDetails}
           >
             See details
           </Button>
-          <a 
-            href={websiteUrl} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="flex items-center text-sm text-gray-500 hover:text-blue-600"
+          <Button
+            variant="ghost"
+            size="sm"
+            className="flex items-center text-sm text-gray-500 hover:text-blue-600 p-0"
+            onClick={handlePreview}
           >
-            <ExternalLink size={14} className="mr-1" />
-            Visit
-          </a>
+            <Eye size={14} className="mr-1" />
+            Preview
+          </Button>
         </div>
       </div>
     </div>
