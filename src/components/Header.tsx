@@ -14,7 +14,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center">
           <Link to="/">
-            <h1 className="text-2xl font-bold text-blue-600">Peruse Web Peek</h1>
+            <h1 className="text-2xl font-bold text-blue-600">Peruse</h1>
           </Link>
         </div>
         

@@ -96,6 +96,78 @@ const Profile = () => {
     return null; // This will redirect in the useEffect
   }
 
+  // Render different profile views based on user role
+  const renderRoleSpecificContent = () => {
+    switch(currentUser.role) {
+      case 'developer':
+        const devUser = currentUser as DeveloperUser;
+        return (
+          <div className="mb-6 bg-blue-50 p-4 rounded-lg">
+            <h3 className="text-lg font-semibold mb-2">Developer Profile</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <p className="text-sm font-medium text-gray-500">Skills</p>
+                <p className="text-gray-700">{devUser.skills || "No skills listed"}</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-500">Hourly Rate</p>
+                <p className="text-gray-700">${devUser.hourlyRate || "0"}/hour</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-500">Available for Chat</p>
+                <p className="text-gray-700">{devUser.availableForChat ? "Yes" : "No"}</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-500">Completed Projects</p>
+                <p className="text-gray-700">{devUser.completedProjects || 0}</p>
+              </div>
+            </div>
+          </div>
+        );
+      case 'seller':
+        const sellerUser = currentUser as SellerUser;
+        return (
+          <div className="mb-6 bg-green-50 p-4 rounded-lg">
+            <h3 className="text-lg font-semibold mb-2">Seller Profile</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="md:col-span-2">
+                <p className="text-sm font-medium text-gray-500">Business Name</p>
+                <p className="text-gray-700">{sellerUser.businessName || currentUser.name}</p>
+              </div>
+              <div className="md:col-span-2">
+                <p className="text-sm font-medium text-gray-500">Product Types</p>
+                <p className="text-gray-700">{sellerUser.productTypes || "No product types listed"}</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-500">Total Sales</p>
+                <p className="text-gray-700">{sellerUser.totalSales || 0}</p>
+              </div>
+              <div>
+                <p className="text-sm font-medium text-gray-500">Rating</p>
+                <p className="text-gray-700">{sellerUser.rating ? `${sellerUser.rating}/5` : "Not rated yet"}</p>
+              </div>
+            </div>
+          </div>
+        );
+      case 'admin':
+        return (
+          <div className="mb-6 bg-purple-50 p-4 rounded-lg">
+            <h3 className="text-lg font-semibold mb-2">Admin Account</h3>
+            <p className="text-gray-700">You have administrative privileges to monitor transactions and manage users.</p>
+            <div className="mt-4">
+              <Link to="/admin/dashboard">
+                <Button variant="outline" className="text-purple-700 border-purple-300 hover:bg-purple-100">
+                  Go to Admin Dashboard
+                </Button>
+              </Link>
+            </div>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -114,8 +186,15 @@ const Profile = () => {
                 <div>
                   <h2 className="text-2xl font-bold">{currentUser.name}</h2>
                   <p className="text-gray-600">{currentUser.email}</p>
+                  <div className="mt-1">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                      {currentUser.role.charAt(0).toUpperCase() + currentUser.role.slice(1)}
+                    </span>
+                  </div>
                 </div>
               </div>
+              
+              {renderRoleSpecificContent()}
               
               {currentUser.bio && (
                 <div className="mb-6">

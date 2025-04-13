@@ -1,6 +1,7 @@
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User, getUserByEmail } from '../services/db';
+import { Navigate } from 'react-router-dom';
 
 interface AuthContextType {
   currentUser: User | null;
@@ -61,4 +62,84 @@ export function useAuth() {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
+}
+
+// Protected route components
+interface ProtectedRouteProps {
+  children: ReactNode;
+  requiredRole?: string;
+}
+
+// General protected route - requires any authenticated user
+export function ProtectedRoute({ children }: ProtectedRouteProps) {
+  const { currentUser, isLoading } = useAuth();
+  
+  if (isLoading) {
+    // You might want to show a loading spinner here
+    return <div>Loading...</div>;
+  }
+  
+  if (!currentUser) {
+    return <Navigate to="/signin" replace />;
+  }
+  
+  return <>{children}</>;
+}
+
+// Admin-only route
+export function AdminRoute({ children }: ProtectedRouteProps) {
+  const { currentUser, isLoading } = useAuth();
+  
+  if (isLoading) {
+    // You might want to show a loading spinner here
+    return <div>Loading...</div>;
+  }
+  
+  if (!currentUser) {
+    return <Navigate to="/signin" replace />;
+  }
+  
+  if (currentUser.role !== 'admin') {
+    return <Navigate to="/" replace />;
+  }
+  
+  return <>{children}</>;
+}
+
+// Developer-only route
+export function DeveloperRoute({ children }: ProtectedRouteProps) {
+  const { currentUser, isLoading } = useAuth();
+  
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  
+  if (!currentUser) {
+    return <Navigate to="/signin" replace />;
+  }
+  
+  if (currentUser.role !== 'developer') {
+    return <Navigate to="/" replace />;
+  }
+  
+  return <>{children}</>;
+}
+
+// Seller-only route
+export function SellerRoute({ children }: ProtectedRouteProps) {
+  const { currentUser, isLoading } = useAuth();
+  
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  
+  if (!currentUser) {
+    return <Navigate to="/signin" replace />;
+  }
+  
+  if (currentUser.role !== 'seller') {
+    return <Navigate to="/" replace />;
+  }
+  
+  return <>{children}</>;
 }
