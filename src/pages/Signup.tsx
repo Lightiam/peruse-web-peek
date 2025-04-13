@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import { createUser, generateId, getUserByEmail } from '../services/db';
+import { createUser, generateId, getUserByEmail, User, DeveloperUser, SellerUser, AdminUser } from '../services/db';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -93,30 +93,63 @@ const Signup = () => {
 
       // Create new user based on role
       const userId = generateId();
-      let newUser = {
-        id: userId,
-        name: data.name,
-        email: data.email,
-        password: data.password, // In production, this should be hashed
-        role: data.role,
-        websites: []
-      };
+      let newUser: User;
       
-      // Add role-specific data
+      // Create user based on role type
       if (data.role === 'developer') {
-        newUser = {
-          ...newUser,
+        const developerUser: DeveloperUser = {
+          id: userId,
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          role: 'developer',
+          websites: [],
           skills: data.skills || '',
           bio: data.bio || '',
-          hourlyRate: data.hourlyRate || '0',
-          availableForChat: true,
+          hourlyRate: data.hourlyRate || '',
+          availableForChat: data.availableForChat ?? true,
+          rating: undefined,
+          completedProjects: 0
         };
-      } else if (data.role === 'seller') {
-        newUser = {
-          ...newUser,
+        newUser = developerUser;
+      } 
+      else if (data.role === 'seller') {
+        const sellerUser: SellerUser = {
+          id: userId,
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          role: 'seller',
+          websites: [],
           businessName: data.businessName || '',
           businessDescription: data.businessDescription || '',
           productTypes: data.productTypes || '',
+          rating: undefined,
+          totalSales: 0
+        };
+        newUser = sellerUser;
+      }
+      else if (data.role === 'admin') {
+        const adminUser: AdminUser = {
+          id: userId,
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          role: 'admin',
+          websites: [],
+          lastActive: new Date().toISOString()
+        };
+        newUser = adminUser;
+      }
+      else {
+        // Regular user
+        newUser = {
+          id: userId,
+          name: data.name,
+          email: data.email,
+          password: data.password,
+          role: 'user',
+          websites: []
         };
       }
       

@@ -1,8 +1,7 @@
-
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { updateUser, User } from '../services/db';
+import { useNavigate, Link } from 'react-router-dom';
+import { updateUser, User, DeveloperUser, SellerUser, AdminUser } from '../services/db';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -40,8 +39,6 @@ const Profile = () => {
       return;
     }
     
-    // In a real app, we would fetch the user's websites
-    // For now, let's just use some sample data for demonstration
     const sampleUserWebsites = websiteData.slice(0, 2);
     setUserWebsites(sampleUserWebsites);
   }, [currentUser, navigate]);
@@ -69,8 +66,7 @@ const Profile = () => {
       const success = await updateUser(updatedUser);
       
       if (success) {
-        login(updatedUser); // Update the current user in context
-        
+        login(updatedUser);
         toast({
           title: "Profile updated",
           description: "Your profile has been successfully updated."
@@ -93,10 +89,9 @@ const Profile = () => {
   };
 
   if (!currentUser) {
-    return null; // This will redirect in the useEffect
+    return null;
   }
 
-  // Render different profile views based on user role
   const renderRoleSpecificContent = () => {
     switch(currentUser.role) {
       case 'developer':
