@@ -1,12 +1,32 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useState } from 'react';
+import Header from '../components/Header';
+import CategoryNav from '../components/CategoryNav';
+import WebsiteGrid from '../components/WebsiteGrid';
+import Footer from '../components/Footer';
+import { websiteData } from '../data/websiteData';
 
 const Index = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-grow container mx-auto px-4 py-8">
+        <div className="mb-8 text-center">
+          <h1 className="text-4xl font-bold text-gray-900 mb-3">Discover Beautiful Websites</h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Explore a curated collection of stunning websites and web applications built by talented developers
+          </p>
+        </div>
+        
+        <div className="mb-10">
+          <CategoryNav onSelectCategory={setSelectedCategory} />
+        </div>
+
+        <WebsiteGrid websites={websiteData} selectedCategory={selectedCategory} />
+      </main>
+      <Footer />
     </div>
   );
 };
