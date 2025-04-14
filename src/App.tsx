@@ -12,6 +12,8 @@ import Signin from "./pages/Signin";
 import ForgotPassword from "./pages/ForgotPassword";
 import Profile from "./pages/Profile";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import Preview from "./pages/Preview";
+import WebsiteDetails from "./pages/WebsiteDetails";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +29,8 @@ const App = () => (
             <Route path="/signup" element={<Signup />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/preview" element={<Preview />} />
+            <Route path="/website-details" element={<WebsiteDetails />} />
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="/admin/dashboard" element={
               <AdminRoute>
