@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, Phone, Mail, Calendar, Code } from 'lucide-react';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
+import { ArrowLeft, ExternalLink, Phone, Mail, Calendar, Code, Home } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { websiteData, WebsiteDetailsData } from '@/data/websiteData';
@@ -44,7 +44,7 @@ const WebsiteDetails = () => {
       <div className="container mx-auto px-4 py-8">
         <Card>
           <CardHeader>
-            <div className="flex items-center">
+            <div className="flex items-center space-x-2">
               <Button 
                 variant="ghost" 
                 size="sm"
@@ -53,6 +53,12 @@ const WebsiteDetails = () => {
               >
                 <ArrowLeft size={16} />
               </Button>
+              <Link to="/">
+                <Button variant="ghost" size="sm">
+                  <Home size={16} className="mr-2" />
+                  Home
+                </Button>
+              </Link>
               <CardTitle>Website Not Found</CardTitle>
             </div>
           </CardHeader>
@@ -66,20 +72,22 @@ const WebsiteDetails = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="mb-6">
+      <div className="mb-6 flex items-center space-x-2">
         <Button 
           variant="ghost" 
           onClick={handleGoBack}
-          className="flex items-center gap-2 mb-2"
+          className="flex items-center gap-2"
         >
           <ArrowLeft size={16} />
-          Back to websites
+          Back
         </Button>
-        <h1 className="text-3xl font-bold">{website.title}</h1>
-        <div className="flex items-center mt-2">
-          <Badge variant="outline" className="mr-2">{website.category}</Badge>
-          <span className="text-sm text-gray-500">Created on {website.creationDate}</span>
-        </div>
+        <Link to="/">
+          <Button variant="ghost" className="flex items-center gap-2">
+            <Home size={16} />
+            Home
+          </Button>
+        </Link>
+        <h1 className="text-3xl font-bold ml-4">{website.title}</h1>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

@@ -1,9 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { updateUser, User, DeveloperUser, SellerUser, AdminUser } from '../services/db';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
+import { Home } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { websiteData } from '@/data/websiteData';
@@ -13,6 +13,7 @@ import DeveloperProfileView from '@/components/profile/DeveloperProfileView';
 import SellerProfileView from '@/components/profile/SellerProfileView';
 import AdminProfileView from '@/components/profile/AdminProfileView';
 import UserWebsites from '@/components/profile/UserWebsites';
+import { Button } from "@/components/ui/button";
 
 const Profile = () => {
   const { currentUser, login } = useAuth();
@@ -89,7 +90,15 @@ const Profile = () => {
       
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-900 mb-8">Your Profile</h1>
+          <div className="flex items-center space-x-4 mb-8">
+            <h1 className="text-3xl font-bold text-gray-900">Your Profile</h1>
+            <Link to="/">
+              <Button variant="ghost" className="flex items-center gap-2">
+                <Home size={16} />
+                Home
+              </Button>
+            </Link>
+          </div>
           
           <div className="bg-white shadow rounded-lg mb-8">
             <div className="p-6">

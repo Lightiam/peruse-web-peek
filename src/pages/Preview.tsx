@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowLeft, RefreshCw, ExternalLink, Home } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { toast } from '@/hooks/use-toast';
+import { Link } from 'react-router-dom';
 
 const Preview = () => {
   const location = useLocation();
@@ -33,14 +33,11 @@ const Preview = () => {
     setError(null);
 
     try {
-      // Normalize URL (add https:// if missing)
       let normalizedUrl = websiteUrl;
       if (!normalizedUrl.startsWith('http://') && !normalizedUrl.startsWith('https://')) {
         normalizedUrl = 'https://' + normalizedUrl;
       }
 
-      // In a real app, this would use a backend endpoint to fetch the preview
-      // For now we'll simulate a response
       const response = await simulatePreviewFetch(normalizedUrl);
       
       if (response.error) {
@@ -61,16 +58,12 @@ const Preview = () => {
     }
   };
 
-  // This function simulates a backend call to get a website preview
-  // In production, this would be replaced with an actual API call
   const simulatePreviewFetch = async (url: string): Promise<{preview?: string, error?: string}> => {
     return new Promise((resolve) => {
       setTimeout(() => {
-        // For demo purposes, return a placeholder image
         if (url.includes('error')) {
           resolve({ error: 'Failed to generate preview for this website' });
         } else {
-          // Use a placeholder image for the preview
           resolve({ 
             preview: 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==' 
           });
@@ -107,6 +100,15 @@ const Preview = () => {
               >
                 <ArrowLeft size={16} />
               </Button>
+              <Link to="/">
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  title="Home"
+                >
+                  <Home size={16} />
+                </Button>
+              </Link>
               <Button 
                 variant="ghost" 
                 size="icon" 
@@ -115,14 +117,6 @@ const Preview = () => {
                 disabled={loading}
               >
                 <RefreshCw size={16} className={loading ? "animate-spin" : ""} />
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="icon" 
-                onClick={handleGoHome} 
-                title="Home"
-              >
-                <Home size={16} />
               </Button>
             </div>
             <div className="flex-1 px-4">

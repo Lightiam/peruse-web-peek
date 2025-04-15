@@ -1,9 +1,7 @@
-
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import { getUserByEmail } from '../services/db';
-import { useToast } from '@/hooks/use-toast';
+import { Home } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -71,6 +69,15 @@ const Signin = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <div className="absolute top-4 left-4">
+        <Link to="/">
+          <Button variant="ghost">
+            <Home className="mr-2 h-5 w-5" />
+            Home
+          </Button>
+        </Link>
+      </div>
+      
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h1 className="text-center text-3xl font-bold text-blue-600">Peruse Web Peek</h1>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>

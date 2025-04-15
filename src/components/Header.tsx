@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Search, User, LogOut } from "lucide-react";
+import { Search, User, LogOut, Home } from "lucide-react";
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -12,9 +12,14 @@ const Header: React.FC = () => {
   return (
     <header className="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
       <div className="container mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center">
+        <div className="flex items-center space-x-4">
           <Link to="/">
             <h1 className="text-2xl font-bold text-blue-600">Peruse</h1>
+          </Link>
+          <Link to="/" className="hidden sm:flex items-center">
+            <Button variant="ghost" size="icon">
+              <Home className="h-5 w-5" />
+            </Button>
           </Link>
         </div>
         

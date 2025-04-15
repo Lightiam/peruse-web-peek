@@ -1,21 +1,18 @@
-
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Home } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { createUser, generateId, getUserByEmail, User, DeveloperUser, SellerUser, AdminUser } from '../services/db';
 import { useToast } from '@/hooks/use-toast';
-import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useAuth } from '@/contexts/AuthContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-// Import our new components
 import BaseSignupForm from '@/components/auth/BaseSignupForm';
 import DeveloperSignupForm from '@/components/auth/DeveloperSignupForm';
 import SellerSignupForm from '@/components/auth/SellerSignupForm';
 import AdminSignupForm from '@/components/auth/AdminSignupForm';
 import { signupSchema, SignupFormValues } from '@/components/auth/signupSchemas';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Signup = () => {
   const { login } = useAuth();
@@ -34,14 +31,12 @@ const Signup = () => {
     }
   });
 
-  // Update form values when role changes
   useEffect(() => {
     form.setValue('role', role);
   }, [role, form]);
 
   const onSubmit = async (data: SignupFormValues) => {
     try {
-      // Check if user already exists
       const existingUser = await getUserByEmail(data.email);
       if (existingUser) {
         toast({
@@ -52,11 +47,9 @@ const Signup = () => {
         return;
       }
 
-      // Create new user based on role
       const userId = generateId();
       let newUser: User;
       
-      // Create user based on role type
       if (data.role === 'developer') {
         const developerUser: DeveloperUser = {
           id: userId,
@@ -103,7 +96,6 @@ const Signup = () => {
         newUser = adminUser;
       }
       else {
-        // Regular user
         newUser = {
           id: userId,
           name: data.name,
@@ -122,10 +114,8 @@ const Signup = () => {
           description: "Your account has been created."
         });
         
-        // Log the user in
         login(newUser);
         
-        // Redirect to home
         navigate('/');
       } else {
         toast({
@@ -146,6 +136,15 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+      <div className="absolute top-4 left-4">
+        <Link to="/">
+          <Button variant="ghost">
+            <Home className="mr-2 h-5 w-5" />
+            Home
+          </Button>
+        </Link>
+      </div>
+      
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h1 className="text-center text-3xl font-bold text-blue-600">Peruse</h1>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Create your account</h2>
