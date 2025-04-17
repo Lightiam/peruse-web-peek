@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Home } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -13,6 +14,8 @@ import SellerSignupForm from '@/components/auth/SellerSignupForm';
 import AdminSignupForm from '@/components/auth/AdminSignupForm';
 import { signupSchema, SignupFormValues } from '@/components/auth/signupSchemas';
 import { useAuth } from '@/contexts/AuthContext';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Form } from '@/components/ui/form';
 
 const Signup = () => {
   const { login } = useAuth();
