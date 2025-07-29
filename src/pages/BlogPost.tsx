@@ -182,10 +182,20 @@ const BlogPostView = () => {
           </CardHeader>
 
           <CardContent className="prose prose-lg max-w-none">
-            {/* Content */}
+            {/* Content with improved typography */}
             <div 
-              className="text-gray-700 leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: blogPost.content.replace(/\n/g, '<br />') }}
+              className="text-gray-700 leading-relaxed text-lg"
+              style={{ 
+                lineHeight: '1.8',
+                letterSpacing: '0.01em'
+              }}
+              dangerouslySetInnerHTML={{ 
+                __html: blogPost.content
+                  .replace(/\n\n/g, '</p><p class="mb-6">')
+                  .replace(/\n/g, '<br />')
+                  .replace(/^/, '<p class="mb-6">')
+                  .replace(/$/, '</p>')
+              }}
             />
           </CardContent>
         </Card>
