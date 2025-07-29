@@ -6,8 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { getAllBlogPosts, BlogPost } from '@/services/db';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Blog = () => {
+  const { currentUser } = useAuth();
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -74,7 +76,21 @@ const Blog = () => {
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">MvpPeek AI Blog</h1>
+        <div className="flex justify-between items-center mb-6">
+          <div className="flex-1"></div>
+          <div className="flex-1 text-center">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">MvpPeek AI Blog</h1>
+          </div>
+          <div className="flex-1 flex justify-end">
+            {currentUser && (
+              <Link to="/blog/create">
+                <Button className="flex items-center gap-2">
+                  <span>Write Post</span>
+                </Button>
+              </Link>
+            )}
+          </div>
+        </div>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
           Insights, tutorials, and stories from the startup community
         </p>

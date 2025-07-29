@@ -16,6 +16,7 @@ import Preview from "./pages/Preview";
 import WebsiteDetails from "./pages/WebsiteDetails";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import CreateBlogPost from "./pages/CreateBlogPost";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import CookiePolicy from "./pages/CookiePolicy";
 import TermsOfService from "./pages/TermsOfService";
@@ -38,6 +39,7 @@ const App = () => (
             <Route path="/preview" element={<Preview />} />
             <Route path="/website-details" element={<WebsiteDetails />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/create" element={<ProtectedRoute><CreateBlogPost /></ProtectedRoute>} />
             <Route path="/blog/:id" element={<BlogPost />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/cookie-policy" element={<CookiePolicy />} />
