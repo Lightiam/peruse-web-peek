@@ -215,30 +215,30 @@ const EnhancedMVPCard: React.FC<EnhancedMVPCardProps> = ({
         )}
       </div>
 
-      <CardContent className="p-4">
+      <CardContent className="p-5">
         {/* Title and Description */}
-        <div className="mb-4">
-          <h3 className="font-semibold text-lg mb-2 text-gray-900 leading-tight">
+        <div className="mb-5">
+          <h3 className="font-semibold text-xl mb-3 text-gray-900 leading-tight tracking-tight">
             {mvp.title}
           </h3>
-          <p className="text-gray-600 text-sm leading-relaxed break-words">
-            {mvp.description.length > 100 
-              ? `${mvp.description.substring(0, 100)}...` 
+          <p className="text-gray-600 text-sm leading-relaxed line-height-loose">
+            {mvp.description.length > 120 
+              ? `${mvp.description.substring(0, 120)}...` 
               : mvp.description}
           </p>
         </div>
 
         {/* Technologies */}
         {mvp.technologies && mvp.technologies.length > 0 && (
-          <div className="mb-4">
-            <div className="flex flex-wrap gap-1">
+          <div className="mb-5">
+            <div className="flex flex-wrap gap-2">
               {mvp.technologies.slice(0, 3).map((tech, index) => (
-                <Badge key={index} variant="outline" className="text-xs">
+                <Badge key={index} variant="outline" className="text-xs px-2 py-1 bg-gray-50">
                   {tech}
                 </Badge>
               ))}
               {mvp.technologies.length > 3 && (
-                <Badge variant="outline" className="text-xs">
+                <Badge variant="outline" className="text-xs px-2 py-1 bg-gray-50">
                   +{mvp.technologies.length - 3}
                 </Badge>
               )}
@@ -247,61 +247,61 @@ const EnhancedMVPCard: React.FC<EnhancedMVPCardProps> = ({
         )}
 
         {/* Social Stats */}
-        <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-          <div className="flex items-center space-x-4">
-            <span className="flex items-center">
-              <Heart size={14} className="mr-1" />
-              {mvp.upvotes}
+        <div className="flex items-center justify-between text-sm text-gray-500 mb-5 py-2">
+          <div className="flex items-center space-x-5">
+            <span className="flex items-center gap-1">
+              <Heart size={14} />
+              <span className="font-medium">{mvp.upvotes}</span>
             </span>
-            <span className="flex items-center">
-              <MessageCircle size={14} className="mr-1" />
-              {mvp.comments}
+            <span className="flex items-center gap-1">
+              <MessageCircle size={14} />
+              <span className="font-medium">{mvp.comments}</span>
             </span>
-            <span className="flex items-center">
-              <Share2 size={14} className="mr-1" />
-              {mvp.reposts}
+            <span className="flex items-center gap-1">
+              <Share2 size={14} />
+              <span className="font-medium">{mvp.reposts}</span>
             </span>
-            <span className="flex items-center">
-              <Eye size={14} className="mr-1" />
-              {mvp.views}
+            <span className="flex items-center gap-1">
+              <Eye size={14} />
+              <span className="font-medium">{mvp.views}</span>
             </span>
           </div>
-          <span className="text-xs">
+          <span className="text-xs text-gray-400 font-medium">
             by {mvp.creatorName}
           </span>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
+        <div className="flex items-center justify-between pt-2 border-t border-gray-100">
+          <div className="flex items-center space-x-3">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => socialFeatures.like(mvp.id)}
-              className={`flex items-center space-x-1 ${isLiked ? 'text-red-500' : 'text-gray-500'}`}
+              className={`flex items-center gap-2 px-3 py-2 ${isLiked ? 'text-red-500' : 'text-gray-500'} hover:bg-gray-50`}
             >
               <Heart size={16} fill={isLiked ? 'currentColor' : 'none'} />
-              <span>Like</span>
+              <span className="text-sm">Like</span>
             </Button>
             
             <Button
               variant="ghost"
               size="sm"
               onClick={() => socialFeatures.comment(mvp.id)}
-              className="flex items-center space-x-1 text-gray-500"
+              className="flex items-center gap-2 px-3 py-2 text-gray-500 hover:bg-gray-50"
             >
               <MessageCircle size={16} />
-              <span>Comment</span>
+              <span className="text-sm">Comment</span>
             </Button>
             
             <Button
               variant="ghost"
               size="sm"
               onClick={() => socialFeatures.repost(mvp.id)}
-              className="flex items-center space-x-1 text-gray-500"
+              className="flex items-center gap-2 px-3 py-2 text-gray-500 hover:bg-gray-50"
             >
               <Share2 size={16} />
-              <span>Share</span>
+              <span className="text-sm">Share</span>
             </Button>
           </div>
 
@@ -310,7 +310,7 @@ const EnhancedMVPCard: React.FC<EnhancedMVPCardProps> = ({
               variant="outline"
               size="sm"
               onClick={handlePreviewClick}
-              className="text-blue-600 hover:text-blue-800"
+              className="text-blue-600 hover:text-blue-800 hover:bg-blue-50 px-4 py-2"
             >
               Preview
             </Button>
@@ -319,9 +319,10 @@ const EnhancedMVPCard: React.FC<EnhancedMVPCardProps> = ({
               variant="ghost"
               size="sm"
               onClick={handleVisitWebsite}
-              className="flex items-center text-gray-500 hover:text-blue-600"
+              className="flex items-center text-gray-500 hover:text-blue-600 hover:bg-gray-50 p-2"
+              title="Visit website"
             >
-              <ExternalLink size={14} />
+              <ExternalLink size={16} />
             </Button>
           </div>
         </div>
