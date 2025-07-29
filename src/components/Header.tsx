@@ -16,11 +16,14 @@ const Header: React.FC = () => {
           <Link to="/">
             <h1 className="text-2xl font-bold text-blue-600">MvpPeek AI</h1>
           </Link>
-          <Link to="/" className="hidden sm:flex items-center">
-            <Button variant="ghost" size="icon">
-              <Home className="h-5 w-5" />
-            </Button>
-          </Link>
+          <nav className="hidden sm:flex items-center space-x-4">
+            <Link to="/">
+              <Button variant="ghost">Home</Button>
+            </Link>
+            <Link to="/blog">
+              <Button variant="ghost">Blog</Button>
+            </Link>
+          </nav>
         </div>
         
         <div className="w-full sm:w-auto flex items-center gap-4">
