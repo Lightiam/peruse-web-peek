@@ -215,34 +215,32 @@ const EnhancedMVPCard: React.FC<EnhancedMVPCardProps> = ({
         )}
       </div>
 
-      <CardContent className="p-5">
+      <CardContent className="p-6 space-y-6">
         {/* Title and Description */}
-        <div className="mb-5">
-          <h3 className="font-semibold text-xl mb-3 text-gray-900 leading-tight tracking-tight">
+        <div className="space-y-3">
+          <h3 className="font-bold text-lg text-gray-900 leading-tight">
             {mvp.title}
           </h3>
-          <p className="text-gray-600 text-sm leading-relaxed line-height-loose">
-            {mvp.description.length > 120 
-              ? `${mvp.description.substring(0, 120)}...` 
+          <p className="text-gray-600 text-sm leading-relaxed">
+            {mvp.description.length > 100 
+              ? `${mvp.description.substring(0, 100)}...` 
               : mvp.description}
           </p>
         </div>
 
         {/* Technologies */}
         {mvp.technologies && mvp.technologies.length > 0 && (
-          <div className="mb-5">
-            <div className="flex flex-wrap gap-2">
-              {mvp.technologies.slice(0, 3).map((tech, index) => (
-                <Badge key={index} variant="outline" className="text-xs px-2 py-1 bg-gray-50">
-                  {tech}
-                </Badge>
-              ))}
-              {mvp.technologies.length > 3 && (
-                <Badge variant="outline" className="text-xs px-2 py-1 bg-gray-50">
-                  +{mvp.technologies.length - 3}
-                </Badge>
-              )}
-            </div>
+          <div className="flex flex-wrap gap-2">
+            {mvp.technologies.slice(0, 3).map((tech, index) => (
+              <Badge key={index} variant="outline" className="text-xs">
+                {tech}
+              </Badge>
+            ))}
+            {mvp.technologies.length > 3 && (
+              <Badge variant="outline" className="text-xs">
+                +{mvp.technologies.length - 3}
+              </Badge>
+            )}
           </div>
         )}
 

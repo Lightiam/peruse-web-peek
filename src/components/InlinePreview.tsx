@@ -12,24 +12,35 @@ const InlinePreview: React.FC<InlinePreviewProps> = ({ url, onClose, className =
   const [isExpanded, setIsExpanded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Create a proper preview using an iframe with fallback
+  // Generate a preview image instead of iframe (which often fails due to X-Frame-Options)
   const createInlinePreview = (websiteUrl: string) => {
     // Ensure URL has protocol
     const formattedUrl = websiteUrl.startsWith('http') ? websiteUrl : `https://${websiteUrl}`;
     
+    // Use a screenshot service or generate a placeholder
+    const screenshotUrl = `https://api.screenshotmachine.com/?key=demo&url=${encodeURIComponent(formattedUrl)}&dimension=1024x768`;
+    
     return (
-      <iframe
-        src={formattedUrl}
-        className="w-full h-full border-0 rounded-lg bg-white"
-        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-        onLoad={() => setIsLoading(false)}
-        onError={() => {
-          setIsLoading(false);
-          console.warn('Failed to load website in iframe');
-        }}
-        title="Website Preview"
-        referrerPolicy="no-referrer-when-downgrade"
-      />
+      <div className="w-full h-full flex flex-col bg-gray-50">
+        <div className="flex-1 flex items-center justify-center p-8">
+          <div className="text-center space-y-4">
+            <div className="w-16 h-16 mx-auto bg-blue-500 rounded-lg flex items-center justify-center">
+              <ExternalLink className="w-8 h-8 text-white" />
+            </div>
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-2">Website Preview</h3>
+              <p className="text-sm text-gray-600 mb-4">{formattedUrl}</p>
+              <Button
+                onClick={() => window.open(formattedUrl, '_blank')}
+                className="inline-flex items-center gap-2"
+              >
+                <ExternalLink size={16} />
+                Visit Website
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   };
 
