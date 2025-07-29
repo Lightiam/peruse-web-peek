@@ -98,14 +98,6 @@ const InlinePreview: React.FC<InlinePreviewProps> = ({ url, onClose, className =
 
       {/* Preview Content */}
       <div className={`relative bg-white ${isExpanded ? 'h-[600px]' : 'h-[400px]'}`}>
-        {isLoading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-            <div className="flex flex-col items-center space-y-2">
-              <div className="w-8 h-8 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
-              <p className="text-sm text-gray-600">Loading preview...</p>
-            </div>
-          </div>
-        )}
         {createInlinePreview(url)}
       </div>
     </div>

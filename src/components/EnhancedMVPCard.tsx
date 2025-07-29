@@ -245,8 +245,8 @@ const EnhancedMVPCard: React.FC<EnhancedMVPCardProps> = ({
         )}
 
         {/* Social Stats */}
-        <div className="flex items-center justify-between text-sm text-gray-500 mb-5 py-2">
-          <div className="flex items-center space-x-5">
+        <div className="flex items-center justify-between text-sm text-gray-500">
+          <div className="flex items-center space-x-4">
             <span className="flex items-center gap-1">
               <Heart size={14} />
               <span className="font-medium">{mvp.upvotes}</span>
