@@ -14,9 +14,9 @@ const Index = () => {
       <Header />
       <main className="flex-grow container mx-auto px-4 py-8">
         <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-3">Discover Beautiful Websites</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-3">Showcase Your MVP</h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Explore a curated collection of stunning websites and web applications built by talented developers
+            Share your startup MVP, get community feedback, and climb the rankings. Join the most supportive community for early-stage founders and their products.
           </p>
         </div>
         
