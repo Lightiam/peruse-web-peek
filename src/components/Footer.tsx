@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <h3 className="font-bold text-xl text-blue-600">Peruse Web Peek</h3>
+            <h3 className="font-bold text-xl text-blue-600">MvpPeek AI</h3>
             <p className="text-gray-500 text-sm mt-1">Showcasing beautiful websites and web apps.</p>
           </div>
           <div className="flex gap-6">
@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         <div className="mt-8 pt-4 border-t border-gray-200 text-center text-gray-500 text-sm">
-          © {new Date().getFullYear()} Peruse Web Peek. All rights reserved.
+          © {new Date().getFullYear()} MvpPeek AI. All rights reserved.
         </div>
       </div>
     </footer>
