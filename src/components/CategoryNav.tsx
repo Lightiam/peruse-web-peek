@@ -28,7 +28,7 @@ const CategoryNav: React.FC<CategoryNavProps> = ({ onSelectCategory }) => {
 
   return (
     <div className="w-full flex justify-center py-8">
-      <div className="flex flex-wrap justify-center gap-3 max-w-4xl">
+      <div className="flex justify-center gap-2 max-w-6xl overflow-x-auto px-4">
         {categories.map((category) => (
           <button
             key={category}
