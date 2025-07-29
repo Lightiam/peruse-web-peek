@@ -218,11 +218,13 @@ const EnhancedMVPCard: React.FC<EnhancedMVPCardProps> = ({
       <CardContent className="p-4">
         {/* Title and Description */}
         <div className="mb-4">
-          <h3 className="font-semibold text-lg mb-2 text-gray-900 line-clamp-1">
+          <h3 className="font-semibold text-lg mb-2 text-gray-900 leading-tight">
             {mvp.title}
           </h3>
-          <p className="text-gray-600 text-sm line-clamp-2">
-            {mvp.description}
+          <p className="text-gray-600 text-sm leading-relaxed break-words">
+            {mvp.description.length > 100 
+              ? `${mvp.description.substring(0, 100)}...` 
+              : mvp.description}
           </p>
         </div>
 

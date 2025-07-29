@@ -12,7 +12,7 @@ const InlinePreview: React.FC<InlinePreviewProps> = ({ url, onClose, className =
   const [isExpanded, setIsExpanded] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Secure iframe embedding for seamless previews
+  // Create a proper preview using an iframe with fallback
   const createInlinePreview = (websiteUrl: string) => {
     // Ensure URL has protocol
     const formattedUrl = websiteUrl.startsWith('http') ? websiteUrl : `https://${websiteUrl}`;
@@ -20,10 +20,15 @@ const InlinePreview: React.FC<InlinePreviewProps> = ({ url, onClose, className =
     return (
       <iframe
         src={formattedUrl}
-        className="w-full h-full border-0 rounded-lg"
-        sandbox="allow-scripts allow-same-origin allow-forms allow-navigation"
+        className="w-full h-full border-0 rounded-lg bg-white"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
         onLoad={() => setIsLoading(false)}
+        onError={() => {
+          setIsLoading(false);
+          console.warn('Failed to load website in iframe');
+        }}
         title="Website Preview"
+        referrerPolicy="no-referrer-when-downgrade"
       />
     );
   };
