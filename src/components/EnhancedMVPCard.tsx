@@ -245,28 +245,30 @@ const EnhancedMVPCard: React.FC<EnhancedMVPCardProps> = ({
         )}
 
         {/* Social Stats */}
-        <div className="flex items-center justify-between text-sm text-gray-500">
-          <div className="flex items-center space-x-4">
-            <span className="flex items-center gap-1">
-              <Heart size={14} />
-              <span className="font-medium">{mvp.upvotes}</span>
-            </span>
-            <span className="flex items-center gap-1">
-              <MessageCircle size={14} />
-              <span className="font-medium">{mvp.comments}</span>
-            </span>
-            <span className="flex items-center gap-1">
-              <Share2 size={14} />
-              <span className="font-medium">{mvp.reposts}</span>
-            </span>
-            <span className="flex items-center gap-1">
-              <Eye size={14} />
-              <span className="font-medium">{mvp.views}</span>
-            </span>
+        <div className="space-y-2">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-6">
+              <span className="flex items-center gap-1.5">
+                <Heart size={14} />
+                <span className="font-medium">{mvp.upvotes}</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <MessageCircle size={14} />
+                <span className="font-medium">{mvp.comments}</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Share2 size={14} />
+                <span className="font-medium">{mvp.reposts}</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Eye size={14} />
+                <span className="font-medium">{mvp.views}</span>
+              </span>
+            </div>
           </div>
-          <span className="text-xs text-gray-400 font-medium">
-            by {mvp.creatorName}
-          </span>
+          <div className="text-xs text-gray-400 font-medium">
+            Created by {mvp.creatorName}
+          </div>
         </div>
 
         {/* Action Buttons */}
